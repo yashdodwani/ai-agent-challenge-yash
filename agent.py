@@ -21,7 +21,7 @@ class ParserAgent:
             max_attempts: Maximum self-correction attempts
         """
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         self.max_attempts = max_attempts
         self.conversation_history: List[Dict] = []
 
@@ -223,7 +223,7 @@ Fix the error and regenerate the complete code."""
             if attempt == 1:
                 code = self.generate_code(target, pdf_path, csv_path)
             else:
-                print(f"🔧 Self-correcting based on previous error...")
+                print(f"Self-correcting based on previous error...")
                 code = self.generate_code(target, pdf_path, csv_path,
                                           previous_error=last_error)
 
@@ -241,7 +241,7 @@ Fix the error and regenerate the complete code."""
             print(f"✅ Test written to {test_path}")
 
             # Run tests
-            print("🧪 Running tests...")
+            print("Running tests...")
             success, output = self._run_tests(test_path)
 
             if success:
